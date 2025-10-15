@@ -30,4 +30,4 @@ jobs:
         echo "**Below is the artifact that just built with $GITHUB_RUN_NUMBER Trigger**" >> $GITHUB_STEP_SUMMARY
         ls -lrt | grep '.exe' >> $GITHUB_STEP_SUMMARY || true
         # echo "cal.exe" >> $GITHUB_STEP_SUMMARY
-        echo "HELLO"
+        echo "HELLO" >> $GITHUB_STEP_SUMMARY
