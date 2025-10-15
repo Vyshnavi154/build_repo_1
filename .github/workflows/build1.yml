@@ -1,0 +1,32 @@
+# Create executables/builds/artifacts for C & C++ code
+name: Create executables for C & C++ code
+
+on:
+  push:
+    branches: [ "main", "develop", "stagging" ]
+  pull_request:
+    branches: [ "main", "develop", "stagging" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install build tools
+      run: sudo apt-get update && sudo apt-get install -y build-essential
+      
+    - name: Run build command
+      run: make
+
+    - name: Check Executable and Update GitHub Summary
+      run: |
+        echo "**----------------------------------------------------------------------**" >> $GITHUB_STEP_SUMMARY
+        echo "**Below are the list of files in $(pwd)**" >> $GITHUB_STEP_SUMMARY
+        ls -lrt >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**----------------------------------------------------------------------**" >> $GITHUB_STEP_SUMMARY
+        echo "**Below is the artifact that just built with $GITHUB_RUN_NUMBER Trigger**" >> $GITHUB_STEP_SUMMARY
+        ls -lrt | grep '.exe' >> $GITHUB_STEP_SUMMARY || true
+        # echo "cal.exe" >> $GITHUB_STEP_SUMMARY
