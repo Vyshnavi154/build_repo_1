@@ -3,9 +3,9 @@ name: Create executables for C & C++ code
 
 on:
   push:
-    branches: [ "main", "develop", "stagging" ]
+    branches: [ "main", "develop", "stagging", "production" ]
   pull_request:
-    branches: [ "main", "develop", "stagging" ]
+    branches: [ "main", "develop", "stagging", "production" ]
 
 jobs:
   build:
