@@ -20,13 +20,14 @@ jobs:
     - name: Run build command
       run: make
 
-    - name: Check Executable and Update GitHub Summary
-      run: |
-        echo "**----------------------------------------------------------------------**" >> $GITHUB_STEP_SUMMARY
-        echo "**Below are the list of files in $(pwd)**" >> $GITHUB_STEP_SUMMARY
-        ls -lrt >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "**----------------------------------------------------------------------**" >> $GITHUB_STEP_SUMMARY
-        echo "**Below is the artifact that just built with $GITHUB_RUN_NUMBER Trigger**" >> $GITHUB_STEP_SUMMARY
-        ls -lrt | grep '.exe' >> $GITHUB_STEP_SUMMARY || true
-        # echo "cal.exe" >> $GITHUB_STEP_SUMMARY
+    - name: Setup SSH key
+        run:|
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 65.0.173.200 >> ~/.ssh/known_hosts
+
+    - name: Deploy to Server
+        run:|
+          ssh 65.0.173.200
+   
