@@ -20,14 +20,6 @@ jobs:
     - name: Run build command
       run: make
 
-    - name: Setup SSH key
-        run:|
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 65.0.173.200 >> ~/.ssh/known_hosts
-
-    - name: Deploy to Server
-        run:|
-          ssh 65.0.173.200
+    - name: List
+      run: ls -lrt
    
