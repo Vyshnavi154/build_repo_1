@@ -3,12 +3,12 @@ name: Create executables for C & C++ code
 
 on:
   push:
-    branches: [ "main", "develop", "stagging" ]
+    branches: [ "main", "develop", "stagging", "production" ]
   pull_request:
-    branches: [ "main", "develop", "stagging" ]
+    branches: [ "main", "develop", "stagging", "production" ]
 
 jobs:
-  build:
+  build1:
 
     runs-on: ubuntu-latest
 
@@ -20,13 +20,6 @@ jobs:
     - name: Run build command
       run: make
 
-    - name: Check Executable and Update GitHub Summary
-      run: |
-        echo "**----------------------------------------------------------------------**" >> $GITHUB_STEP_SUMMARY
-        echo "**Below are the list of files in $(pwd)**" >> $GITHUB_STEP_SUMMARY
-        ls -lrt >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "**----------------------------------------------------------------------**" >> $GITHUB_STEP_SUMMARY
-        echo "**Below is the artifact that just built with $GITHUB_RUN_NUMBER Trigger**" >> $GITHUB_STEP_SUMMARY
-        ls -lrt | grep '.exe' >> $GITHUB_STEP_SUMMARY || true
-        # echo "cal.exe" >> $GITHUB_STEP_SUMMARY
+    - name: List
+      run: ls -lrt
+   
